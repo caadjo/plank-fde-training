@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
+import { config } from "@/lib/config";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WorkBot",
+  metadataBase: new URL(config.siteUrl),
+  title: { default: "WorkBot — operações em equipe", template: "%s | WorkBot" },
   description:
-    "Plataforma de workflows empresariais — projeto do curso AI FDE da Plank.",
+    "Projeto WorkBot: um assistente para operações, finanças e suporte, desenvolvido no curso AI FDE da Plank.",
+  applicationName: "WorkBot",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "WorkBot",
+    title: "WorkBot — operações em equipe",
+    description:
+      "Acompanhe o desenvolvimento do assistente WorkBot no curso AI FDE da Plank.",
+  },
+  robots: {
+    index: config.environment === "production",
+    follow: config.environment === "production",
+  },
 };
 
 export default function RootLayout({

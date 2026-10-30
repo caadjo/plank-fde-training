@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,6 +10,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { config } from "@/lib/config";
+
+export const metadata: Metadata = {
+  title: "Configurações",
+  description: "Ambiente e versão da publicação do WorkBot.",
+  alternates: { canonical: "/settings" },
+  openGraph: {
+    title: "Configurações | WorkBot",
+    description: "Ambiente e versão da publicação do WorkBot.",
+    url: "/settings",
+  },
+};
 
 export default function Settings() {
   return (
