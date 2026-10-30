@@ -20,6 +20,7 @@ Use Node.js >=22.13 e a versão do pnpm fixada em `package.json`. Se necessário
 
 - Next.js App Router em `src/app/`, TypeScript estrito e Tailwind CSS.
 - Use Server Components por padrão; adicione `"use client"` apenas quando houver interação ou APIs do navegador.
+- Leia variáveis de ambiente somente em `src/lib/config.ts`; importe `config` nos demais módulos.
 - Alias de importação: `@/*` aponta para `src/*`.
 - Componentes shadcn/ui ficam em `src/components/ui/`; use `cn` de `src/lib/utils.ts` para combinar classes.
 - Use HTML semântico, foco visível, nomes acessíveis e layouts responsivos.
