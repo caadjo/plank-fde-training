@@ -1,53 +1,48 @@
-import { ArrowUpRight, Workflow } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import Link from "next/link";
+import { Workflow } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Home() {
   return (
     <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 sm:px-10">
-      <header className="flex items-center gap-3 border-b py-6">
-        <Workflow aria-hidden="true" className="size-6" />
-        <span className="text-xl font-semibold tracking-tight">WorkBot</span>
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b py-6">
+        <Link
+          href="/"
+          className="flex items-center gap-3 rounded focus-visible:outline-2 focus-visible:outline-offset-4"
+          aria-label="WorkBot — início"
+        >
+          <Workflow aria-hidden="true" className="size-6" />
+          <span className="text-xl font-semibold tracking-tight">WorkBot</span>
+        </Link>
+        <nav aria-label="Navegação principal">
+          <Link
+            href="/settings"
+            className={buttonVariants({ variant: "ghost" })}
+          >
+            Configurações
+          </Link>
+        </nav>
       </header>
       <main className="flex flex-1 flex-col justify-center py-16 sm:py-24">
         <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-          Um ponto de partida para seus workflows.
+          Um lugar para organizar o trabalho da sua equipe.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          WorkBot é a plataforma de workflows empresariais que vamos construir
-          durante o curso AI FDE da Plank, uma etapa de cada vez.
+          WorkBot é um assistente para operações, finanças e suporte. Este
+          projeto evolui ao longo do curso AI FDE da Plank, começando pela base
+          do aplicativo e sua publicação.
         </p>
-        <Card className="mt-10 max-w-2xl">
-          <CardHeader>
-            <CardTitle>O projeto começa aqui</CardTitle>
-            <CardDescription>
-              Dia 1: estrutura inicial do aplicativo.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="leading-relaxed text-muted-foreground">
-              A base está pronta para as próximas aulas. Os workflows e as
-              integrações serão adicionados ao longo do curso.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button
-              render={<a href="https://joinplank.com/ai-fde-course" />}
-              nativeButton={false}
-            >
-              Acessar o curso
-              <ArrowUpRight aria-hidden="true" />
-            </Button>
-          </CardFooter>
-        </Card>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/settings" className={buttonVariants()}>
+            Ver configurações
+          </Link>
+          <Link
+            href="/api/health"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Consultar health check
+          </Link>
+        </div>
       </main>
       <footer className="border-t py-6 text-sm text-muted-foreground">
         WorkBot · Projeto do curso AI FDE da Plank
