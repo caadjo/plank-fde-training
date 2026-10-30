@@ -7,7 +7,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 sm:px-10">
+    <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-6 sm:px-10">
       <header className="flex flex-wrap items-center justify-between gap-4 border-b py-6">
         <Link
           href="/"
@@ -47,9 +47,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-      <footer className="border-t py-6 text-sm text-muted-foreground">
-        WorkBot · Projeto do curso AI FDE da Plank
-      </footer>
     </div>
   );
 }
