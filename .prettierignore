@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+pnpm-lock.yaml
+next-env.d.ts
+README.md
+.agents/
+.codex/
+.aws/
