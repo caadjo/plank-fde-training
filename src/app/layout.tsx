@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/site-footer";
 import type { Metadata } from "next";
 import { config } from "@/lib/config";
 import "./globals.css";
@@ -29,7 +30,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="flex min-h-screen flex-col antialiased">
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

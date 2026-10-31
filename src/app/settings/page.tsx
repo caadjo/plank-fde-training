@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function Settings() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-8 px-6 py-12 sm:px-10">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-12 sm:px-10">
       <Link
         href="/"
         className={buttonVariants({ variant: "outline", className: "w-fit" })}
