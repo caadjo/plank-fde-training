@@ -23,16 +23,24 @@ Abra <http://localhost:3000> durante o desenvolvimento.
 - `pnpm format`: aplica Prettier.
 - `pnpm format:check`: verifica formatação.
 - `pnpm typecheck`: gera os tipos de rotas e executa TypeScript.
+- `pnpm test`: executa os testes com Vitest (`vitest run`).
 - `pnpm build`: build de produção.
 - `pnpm start`: serve o build de produção.
-- `pnpm check`: executa lint, formatação, tipos e build em sequência.
+- `pnpm check`: executa lint, formatação, tipos, testes e build em sequência.
 
 ## Estrutura
 
 - `src/app/`: rotas, layout, metadados e estilos globais (App Router).
+- `src/components/site-header.tsx`: cabeçalho da página inicial.
+- `src/components/site-header.test.tsx`: testes de renderização estática do cabeçalho.
+- `vitest.config.mts`: configuração do Vitest com TSX e alias `@/` para `src/`.
 - `src/components/ui/`: componentes Button e Card do shadcn/ui.
 - `src/lib/utils.ts`: utilitário `cn`.
 - `components.json`: configuração do CLI shadcn/ui.
 - `.github/workflows/check.yml`: validação de pull requests e pushes para `main`.
 
 O Dia 1 entrega a base técnica e uma tela inicial. Autenticação, execução de workflows e integrações serão implementadas nas próximas etapas do curso.
+
+## Dia 2 — testes
+
+O cabeçalho da página inicial foi extraído para `SiteHeader`, preservando a navegação e a acessibilidade. Os testes usam `renderToStaticMarkup` de `react-dom/server` e verificam a marca WorkBot e os links para `/` e `/settings`, sem depender de um navegador.

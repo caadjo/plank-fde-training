@@ -12,9 +12,10 @@ Use Node.js >=22.13 e a versão do pnpm fixada em `package.json`. Se necessário
 - `pnpm format`: aplica Prettier.
 - `pnpm format:check`: verifica Prettier.
 - `pnpm typecheck`: gera tipos do Next.js e verifica TypeScript.
+- `pnpm test`: executa os testes com Vitest (`vitest run`).
 - `pnpm build`: gera o build de produção.
 - `pnpm start`: serve o build de produção.
-- `pnpm check`: executa lint, formatação, tipos e build; rode antes de entregar alterações.
+- `pnpm check`: executa lint, formatação, tipos, testes e build; rode antes de entregar alterações.
 
 ## Convenções
 
