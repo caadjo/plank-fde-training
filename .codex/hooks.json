@@ -1,0 +1,18 @@
+{
+  "description": "Formata com Prettier somente os arquivos editados por apply_patch, Edit ou Write.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "^(apply_patch|Edit|Write)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/format-edits.mjs\"",
+            "timeout": 60,
+            "statusMessage": "Formatando os arquivos editados"
+          }
+        ]
+      }
+    ]
+  }
+}

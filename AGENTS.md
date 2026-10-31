@@ -40,3 +40,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Skills, revisão e formatação
+
+- Skills locais em `.agents/skills/`: `component`, `api-route`, `pre-deploy` e `pr-review`; invoque com `$nome` no Codex.
+- `pr-review` delega em paralelo a `bug_hunter`, `performance_reviewer` e `security_reviewer`, definidos em `.codex/agents/`. Os revisores não editam nem publicam; herdam as permissões e o modelo da sessão.
+- `node scripts/pr-review-diff.mjs [numero]` obtém o diff e os SHAs sem trocar branch. Sem número, cobre apenas `main...HEAD`, não o working tree.
+- `.codex/hooks.json` registra Prettier após `apply_patch`, `Edit` e `Write`, usando `.codex/hooks/format-edits.mjs`. Respeite a revisão de confiança em `/hooks`; não contorne essa etapa.
+- O hook considera só os arquivos da edição, respeita `.prettierignore` e não formata alvos fora do projeto. Edições por shell não são cobertas por esse matcher.
