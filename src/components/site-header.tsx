@@ -13,7 +13,13 @@ export function SiteHeader() {
         <Workflow aria-hidden="true" className="size-6" />
         <span className="text-xl font-semibold tracking-tight">WorkBot</span>
       </Link>
-      <nav aria-label="Navegação principal">
+      <nav
+        aria-label="Navegação principal"
+        className="flex flex-wrap items-center gap-1"
+      >
+        <Link href="/requests" className={buttonVariants({ variant: "ghost" })}>
+          Solicitações
+        </Link>
         <Link href="/settings" className={buttonVariants({ variant: "ghost" })}>
           Configurações
         </Link>
