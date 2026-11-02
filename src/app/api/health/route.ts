@@ -1,5 +1,7 @@
+import { connection } from "next/server";
 import { config } from "@/lib/config";
 
-export function GET() {
+export async function GET() {
+  await connection();
   return Response.json({ status: "ok", commit: config.commit });
 }
