@@ -50,7 +50,7 @@ Não atribuir esses ajustes a um revisor que não os reportou.
 
 - Concluído: workspace Workbot, equipe WOR, projeto WorkBot — AI FDE e 20 tickets WOR-5 a WOR-24. Tamanhos S/M estão nas descrições. Três registros históricos estão Done; o health e as novas entregas ficam pendentes.
 - Concluído: arquivo Figma com formulário, lista, admin e configurações; frames vinculados a WOR-10, WOR-11 e WOR-13 a WOR-15.
-- Configurar e autenticar as integrações no Codex do WSL. A integração desta conversa não autentica automaticamente outra sessão.
+- Concluído: Linear, Figma e GitHub foram consultados pelo MCP na sessão Codex do WSL, com dados reais do ticket, frame e PR.
 - A criação de contas, login e revisão de permissões precisam da participação do proprietário.
 
 Nenhuma dessas etapas deve ser marcada como concluída apenas por haver arquivos locais.
@@ -59,4 +59,8 @@ Nenhuma dessas etapas deve ser marcada como concluída apenas por haver arquivos
 
 pnpm check completo aprovado no repositório do WSL: lint, formatação, tipos, 18 testes e build. O build identifica /api/health como dinâmico (ƒ). Nenhum push ou merge foi feito pela sessão de preparação.
 
-Configuração dos três MCPs preparada em .codex/config.toml, sem credenciais. Autenticação e consultas reais na sessão WSL continuam pendentes; seguir docs/day3-integrations.md.
+Configuração dos três MCPs preparada em .codex/config.toml, sem credenciais. Autenticação e consultas reais na sessão WSL concluídas. O guia de configuração permanece em docs/day3-integrations.md.
+
+## Implementação local pronta
+
+Os sete tickets de implementação foram preparados em branches cumulativas, com commits próprios. O pnpm check final passou com 55 testes e build de produção. O teste no navegador cobriu erro com preservação das seleções, criação, redirecionamento, lista, API, overview e compatibilidade de /settings. Publicação, CI remoto, uso em produção e Verify Day 3 continuam a cargo do proprietário, na ordem de docs/day3-publicacao.md. Nenhum push ou merge remoto foi feito pela sessão de preparação.
