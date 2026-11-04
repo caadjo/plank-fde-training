@@ -19,5 +19,6 @@ describe("SiteHeader", () => {
     expect(navigation).toBeDefined();
     expect(navigation).toContain('href="/requests"');
     expect(navigation).toContain('href="/admin"');
+    expect(navigation).toContain('href="/policies"');
   });
 });

@@ -1,3 +1,4 @@
+import { RequestStatusControls } from "@/components/request-status-controls";
 import { notFound } from "next/navigation";
 import {
   priorityLabels,
@@ -49,6 +50,7 @@ export async function RequestDetail({
           </dd>
         </div>
       </dl>
+      <RequestStatusControls request={request} />
       <section aria-labelledby="request-details">
         <h2 id="request-details" className="text-lg font-semibold">
           Detalhes

@@ -5,6 +5,7 @@ import {
   workRequestSchema,
   type WorkRequest,
 } from "./schema";
+import type { RequestFilters } from "./filters";
 
 const requestGlobal = globalThis as typeof globalThis & {
   workbotRequests?: WorkRequest[];
@@ -28,9 +29,16 @@ export async function createRequest(input: unknown): Promise<WorkRequest> {
   return { ...request };
 }
 
-export async function listRequests(): Promise<WorkRequest[]> {
+export async function listRequests(
+  filters: RequestFilters = {},
+): Promise<WorkRequest[]> {
   await io();
   return store()
+    .filter(
+      (request) =>
+        (!filters.team || request.team === filters.team) &&
+        (!filters.status || request.status === filters.status),
+    )
     .toReversed()
     .map((request) => ({ ...request }));
 }
