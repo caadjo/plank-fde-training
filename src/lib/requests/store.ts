@@ -30,3 +30,9 @@ export async function listRequests(): Promise<WorkRequest[]> {
     .toReversed()
     .map((request) => ({ ...request }));
 }
+
+export async function getRequest(id: string): Promise<WorkRequest | undefined> {
+  await io();
+  const request = store().find((request) => request.id === id);
+  return request ? { ...request } : undefined;
+}
