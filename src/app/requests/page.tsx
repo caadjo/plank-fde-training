@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { RequestsTable } from "@/components/requests-table";
 import { buttonVariants } from "@/components/ui/button";
-import { listRequests } from "@/lib/requests/store";
+import { RequestList, type SearchParams } from "./request-list";
 
 export const metadata: Metadata = { title: "Solicitações" };
 
-async function RequestList() {
-  const requests = await listRequests();
-  return <RequestsTable requests={requests} />;
-}
-
-export default function RequestsPage() {
+export default function RequestsPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   return (
     <main className="flex-1 py-10 sm:py-14">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
@@ -35,7 +33,7 @@ export default function RequestsPage() {
           </p>
         }
       >
-        <RequestList />
+        <RequestList searchParams={searchParams} />
       </Suspense>
     </main>
   );

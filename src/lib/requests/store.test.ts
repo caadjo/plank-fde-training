@@ -82,4 +82,45 @@ describe("requests model", () => {
     list.pop();
     expect(await listRequests()).toMatchObject([{ title: "Título original" }]);
   });
+
+  it("filters by team, status or both without changing the full list or order", async () => {
+    const first = await createRequest({
+      title: "Finanças antiga",
+      team: "finance",
+    });
+    const second = await createRequest({
+      title: "Pedido de suporte",
+      team: "support",
+    });
+    const third = await createRequest({
+      title: "Finanças recente",
+      team: "finance",
+    });
+    vi.stubGlobal("workbotRequests", [
+      first,
+      { ...second, status: "completed" },
+      third,
+    ]);
+    expect((await listRequests({ team: "finance" })).map((r) => r.id)).toEqual([
+      third.id,
+      first.id,
+    ]);
+    expect(
+      (await listRequests({ status: "completed" })).map((r) => r.id),
+    ).toEqual([second.id]);
+    expect(
+      (await listRequests({ team: "finance", status: "new" })).map((r) => r.id),
+    ).toEqual([third.id, first.id]);
+    expect(
+      await listRequests({ team: "finance", status: "completed" }),
+    ).toEqual([]);
+    expect((await listRequests()).map((r) => r.id)).toEqual([
+      third.id,
+      second.id,
+      first.id,
+    ]);
+    const filtered = await listRequests({ team: "finance" });
+    filtered[0].title = "Alterado";
+    expect((await listRequests())[0].title).toBe(third.title);
+  });
 });
