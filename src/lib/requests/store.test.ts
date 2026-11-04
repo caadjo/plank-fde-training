@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { io } from "next/cache";
 import { requestInputSchema, workRequestSchema } from "./schema";
-import { createRequest, listRequests } from "./store";
+import { createRequest, getRequest, listRequests } from "./store";
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
 
@@ -9,6 +10,39 @@ beforeEach(() => {
 });
 
 describe("requests model", () => {
+  it("finds only the requested ID and returns defensive copies", async () => {
+    await createRequest({ title: "Outra solicitação" });
+    const created = await createRequest({ title: "Título original" });
+    const found = await getRequest(created.id);
+    expect(found).toEqual(created);
+    expect(found).not.toBe(created);
+    found!.title = "Alteração externa";
+    expect(await getRequest(created.id)).toEqual(created);
+  });
+
+  it.each(["", "unknown", "00000000-0000-4000-8000-000000000000"])(
+    "returns undefined for an unknown ID: %s",
+    async (id) => {
+      await createRequest({ title: "Solicitação existente" });
+      expect(await getRequest(id)).toBeUndefined();
+    },
+  );
+
+  it("waits for io before reading the store", async () => {
+    let resume!: () => void;
+    vi.mocked(io).mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          resume = resolve;
+        }),
+    );
+    const pending = getRequest("late-id");
+    const created = await createRequest({ title: "Criada durante a espera" });
+    vi.stubGlobal("workbotRequests", [{ ...created, id: "late-id" }]);
+    resume();
+    expect(await pending).toMatchObject({ id: "late-id" });
+  });
+
   it("trims text and applies defaults", async () => {
     const request = await createRequest({
       title: "  Relatório mensal  ",

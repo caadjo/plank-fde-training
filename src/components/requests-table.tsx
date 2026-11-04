@@ -62,7 +62,12 @@ export function RequestsTable({
           {requests.map((request) => (
             <TableRow key={request.id}>
               <TableCell className="min-w-56 max-w-md whitespace-normal break-words font-medium">
-                {request.title}
+                <Link
+                  href={`/requests/${request.id}`}
+                  className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
+                >
+                  {request.title}
+                </Link>
               </TableCell>
               <TableCell>{teamLabels[request.team]}</TableCell>
               <TableCell>
