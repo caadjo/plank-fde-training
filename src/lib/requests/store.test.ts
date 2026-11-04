@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { requestInputSchema, workRequestSchema } from "./schema";
-import { createRequest, listRequests } from "./store";
+import { createRequest, listRequests, updateRequestStatus } from "./store";
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
 
@@ -9,6 +9,40 @@ beforeEach(() => {
 });
 
 describe("requests model", () => {
+  it("updates every shared status, preserves fields and returns defensive copies", async () => {
+    const original = await createRequest({ title: "Atualizar acesso" });
+    for (const status of workRequestSchema.shape.status.options) {
+      const updated = await updateRequestStatus(original.id, status);
+      expect(updated).toEqual({ ...original, status });
+      updated!.title = "Mutação externa";
+      expect(await listRequests()).toEqual([{ ...original, status }]);
+    }
+  });
+
+  it("does not insert missing IDs", async () => {
+    expect(
+      await updateRequestStatus(
+        "c0b91ad0-04c6-4e2a-8a78-fcda241411ac",
+        "completed",
+      ),
+    ).toBeNull();
+    expect(await listRequests()).toEqual([]);
+  });
+
+  it.each(["invalid", "", null, undefined, 1, {}, ["completed"]])(
+    "rejects an untrusted status before writing: %j",
+    async (status) => {
+      const original = await createRequest({ title: "Atualizar acesso" });
+      await expect(updateRequestStatus(original.id, status)).rejects.toThrow();
+      expect(await listRequests()).toEqual([original]);
+    },
+  );
+
+  it("rejects an invalid ID without changing the store", async () => {
+    const original = await createRequest({ title: "Atualizar acesso" });
+    await expect(updateRequestStatus({}, "completed")).rejects.toThrow();
+    expect(await listRequests()).toEqual([original]);
+  });
   it("trims text and applies defaults", async () => {
     const request = await createRequest({
       title: "  Relatório mensal  ",
