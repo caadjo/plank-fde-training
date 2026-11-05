@@ -4,23 +4,20 @@ import { SiteHeader } from "@/components/site-header";
 
 describe("SiteHeader", () => {
   it("exibe a marca WorkBot", () => {
-    const markup = renderToStaticMarkup(<SiteHeader />);
-
-    expect(markup).toContain(">WorkBot</span>");
+    expect(renderToStaticMarkup(<SiteHeader />)).toContain(">WorkBot</span>");
   });
-
   it("oferece um link para a página inicial", () => {
     const markup = renderToStaticMarkup(<SiteHeader />);
-
     expect(markup).toMatch(/<a\b[^>]*href="\/"[^>]*>/);
     expect(markup).toContain('aria-label="WorkBot — início"');
   });
-
-  it("oferece um link para as configurações na navegação principal", () => {
+  it("oferece solicitações e configurações na navegação principal", () => {
     const markup = renderToStaticMarkup(<SiteHeader />);
-
-    expect(markup).toMatch(
-      /<nav aria-label="Navegação principal"><a\b[^>]*href="\/settings"[^>]*>Configurações<\/a><\/nav>/,
-    );
+    const navigation = markup.match(
+      /<nav\b[^>]*aria-label="Navegação principal"[^>]*>(.*?)<\/nav>/,
+    )?.[1];
+    expect(navigation).toBeDefined();
+    expect(navigation).toContain('href="/requests"');
+    expect(navigation).toContain('href="/settings"');
   });
 });
