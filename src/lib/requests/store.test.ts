@@ -1,7 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { io } from "next/cache";
 import { requestInputSchema, workRequestSchema } from "./schema";
-import { createRequest, getRequest, listRequests, updateRequestStatus } from "./store";
+import {
+  createRequest,
+  getRequest,
+  listRequests,
+  updateRequestStatus,
+} from "./store";
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
 
@@ -10,6 +15,22 @@ beforeEach(() => {
 });
 
 describe("requests model", () => {
+  it("shares status updates across detail reads and combined filters", async () => {
+    const request = await createRequest({
+      title: "Integração Dia 4",
+      team: "finance",
+    });
+    await updateRequestStatus(request.id, "completed");
+    expect(await getRequest(request.id)).toEqual({
+      ...request,
+      status: "completed",
+    });
+    expect(await listRequests({ team: "finance", status: "new" })).toEqual([]);
+    expect(
+      await listRequests({ team: "finance", status: "completed" }),
+    ).toEqual([{ ...request, status: "completed" }]);
+  });
+
   it("finds only the requested ID and returns defensive copies", async () => {
     await createRequest({ title: "Outra solicitação" });
     const created = await createRequest({ title: "Título original" });

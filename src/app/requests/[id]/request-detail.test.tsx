@@ -38,7 +38,13 @@ describe("request detail", () => {
       "whitespace-pre-wrap",
     ])
       expect(html).toContain(text);
-    expect(html).not.toContain("<script>");
+    const details = html.match(
+      /<section[^>]*aria-labelledby="request-details"[^>]*>([\s\S]*?)<\/section>/,
+    )?.[1];
+    expect(details).toBeDefined();
+    expect(details).not.toContain("<script>");
+    expect(html).toContain('aria-label="Atualizar status da solicitação"');
+    expect(html).toContain("Alterar status");
   });
 
   it("explains when optional details are empty", async () => {
