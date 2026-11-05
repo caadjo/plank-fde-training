@@ -1,3 +1,4 @@
+import "@/testing/database";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as store from "@/lib/requests/store";
 import { GET, POST } from "./route";
@@ -9,7 +10,6 @@ import {
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
 beforeEach(() => {
-  vi.stubGlobal("workbotRequests", []);
   vi.restoreAllMocks();
 });
 

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { requestInputSchema } from "@/lib/requests/schema";
 import { createRequest } from "@/lib/requests/store";
+import { track } from "@/lib/analytics";
 import type { RequestFormState } from "./form-state";
 
 export async function submitRequest(
@@ -31,7 +32,11 @@ export async function submitRequest(
       message: "Revise os campos indicados antes de enviar.",
     };
   }
-  await createRequest(parsed.data);
+  const request = await createRequest(parsed.data);
+  await track("request_submitted", {
+    requestId: request.id,
+    team: request.team,
+  });
   revalidatePath("/requests");
   revalidatePath("/admin");
   redirect("/requests");

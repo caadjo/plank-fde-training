@@ -1,5 +1,6 @@
+import "@/testing/database";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { RequestList } from "./request-list";
 import { createRequest } from "@/lib/requests/store";
 
@@ -12,8 +13,6 @@ async function render(
     await RequestList({ searchParams: Promise.resolve(params) }),
   );
 }
-
-beforeEach(() => vi.stubGlobal("workbotRequests", []));
 
 describe("request list page content", () => {
   it("renders only matching requests in descending order", async () => {

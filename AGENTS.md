@@ -51,10 +51,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Solicitações e administração
 
-- Contrato compartilhado em `src/lib/requests/schema.ts`; não duplique validação entre formulário e API. Limites e defaults estão em `docs/specs/request-model.md`.
-- `store.ts` usa `globalThis` apenas como armazenamento temporário do curso. Não oferece durabilidade nem compartilhamento entre instâncias; use somente dados fictícios nesta etapa.
+- Contrato compartilhado sem dependências de banco em `src/lib/request-model.ts`; não duplique validação entre formulário e API. Os imports anteriores são preservados por reexports.
+- `src/lib/requests.ts` usa SQL parametrizado e valida linhas retornadas. `db.ts` seleciona Postgres ou PGlite; `globalThis` guarda somente a conexão. Testes usam `memory://`.
 - Leituras dinâmicas aguardam `io()` e aparecem sob `Suspense`. A Server Action invalida `/requests` e `/admin` antes de redirecionar.
 - Preserve valores devolvidos após validação, inclusive os selects nativos. Confira também no navegador; o teste da action não demonstra o estado final do DOM.
 - Schemas de resposta da API ficam em `src/app/api/requests/types.ts`; valide respostas nos testes e não converta falhas internas em 400.
 - Configurações ficam em `/admin/settings`; `/settings` mantém compatibilidade por redirecionamento. O admin ainda não tem autenticação nesta etapa do curso.
 - Backlog e integrações: `docs/backlog.md` e `docs/day3-integrations.md`. Ordem de publicação: `docs/day3-publicacao.md`.
+- Dia 5: `docs/day5.md`; banco MCP usa `DATABASE_READONLY_URL` com papel SELECT-only e transações READ ONLY. Eventos nunca incluem título, detalhes ou dados pessoais.

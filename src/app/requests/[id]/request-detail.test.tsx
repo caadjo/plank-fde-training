@@ -1,15 +1,14 @@
+import "@/testing/database";
 import { Suspense } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { track } from "@/lib/analytics";
 import { createRequest } from "@/lib/requests/store";
 import RequestDetailPage from "./page";
 import { RequestDetail } from "./request-detail";
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
-
-beforeEach(() => {
-  vi.stubGlobal("workbotRequests", []);
-});
+vi.mock("@/lib/analytics", () => ({ track: vi.fn() }));
 
 describe("request detail", () => {
   it("renders the requested record with semantic fields and escaped multiline details", async () => {
@@ -45,6 +44,10 @@ describe("request detail", () => {
     expect(details).not.toContain("<script>");
     expect(html).toContain('aria-label="Atualizar status da solicitação"');
     expect(html).toContain("Alterar status");
+    expect(track).toHaveBeenCalledWith("request_viewed", {
+      requestId: request.id,
+      team: request.team,
+    });
   });
 
   it("explains when optional details are empty", async () => {

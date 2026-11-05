@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "workbot-database": {
+      "command": "pnpm",
+      "args": ["exec", "tsx", "mcp/database.ts"]
+    },
+    "workbot-posthog": {
+      "command": "pnpm",
+      "args": ["exec", "tsx", "mcp/posthog.ts"]
+    }
+  }
+}

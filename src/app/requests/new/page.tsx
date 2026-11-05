@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
+import { Track } from "@/lib/analytics";
 import { RequestForm } from "./request-form";
 
 export const metadata: Metadata = { title: "Nova solicitação" };
@@ -22,6 +24,9 @@ export default function NewRequestPage() {
         </p>
       </div>
       <RequestForm />
+      <Suspense fallback={null}>
+        <Track />
+      </Suspense>
     </main>
   );
 }

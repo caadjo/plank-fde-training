@@ -1,8 +1,8 @@
 # Modelo de solicitações
 
-- schema.ts concentra contratos Zod e rótulos; filters.ts interpreta os parâmetros da URL.
-- Preserve createRequest, getRequest, updateRequestStatus e listRequests com filtros opcionais combináveis.
-- Valide entradas antes de escrever e aguarde io() antes de acessar o armazenamento.
-- Retorne cópias defensivas e mantenha a ordenação da lista da mais recente para a mais antiga.
-- O armazenamento global é temporário e local ao processo; use somente dados fictícios.
-- Teste a atualização de status junto à consulta por ID e aos filtros combinados.
+- request-model.ts concentra contratos Zod e rótulos sem dependências do servidor.
+- requests.ts concentra SQL; schema.ts e store.ts nesta pasta preservam imports anteriores.
+- Preserve createRequest, getRequest, updateRequestStatus e listRequests com filtros combináveis.
+- Valide entradas antes de escrever e aguarde io() antes de leituras dinâmicas.
+- Use parâmetros SQL e valide cada linha retornada pelo schema compartilhado.
+- Testes usam PGlite em memória, sem acesso a bancos de desenvolvimento ou produção.

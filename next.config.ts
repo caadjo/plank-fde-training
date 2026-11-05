@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  serverExternalPackages: ["@electric-sql/pglite", "postgres"],
   outputFileTracingIncludes: {
     "/policies": ["./content/policies/*.md"],
     "/policies/*": ["./content/policies/*.md"],

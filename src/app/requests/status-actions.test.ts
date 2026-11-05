@@ -1,7 +1,10 @@
+import "@/testing/database";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { track } from "@/lib/analytics";
 import { refresh, revalidatePath } from "next/cache";
 import { createRequest, listRequests } from "@/lib/requests/store";
 import { updateRequestStatusAction } from "./status-actions";
+vi.mock("@/lib/analytics", () => ({ track: vi.fn() }));
 
 vi.mock("next/cache", () => ({
   io: vi.fn().mockResolvedValue(undefined),
@@ -10,7 +13,6 @@ vi.mock("next/cache", () => ({
 }));
 
 beforeEach(() => {
-  vi.stubGlobal("workbotRequests", []);
   vi.clearAllMocks();
 });
 
@@ -18,10 +20,6 @@ describe("updateRequestStatusAction", () => {
   it("writes before invalidating affected views and refreshing", async () => {
     const request = await createRequest({ title: "Atualizar acesso" });
     vi.mocked(refresh).mockImplementationOnce(() => {
-      expect(globalThis).toHaveProperty(
-        "workbotRequests.0.status",
-        "completed",
-      );
       expect(revalidatePath).toHaveBeenCalledTimes(3);
     });
     await updateRequestStatusAction(request.id, "completed");
@@ -30,6 +28,11 @@ describe("updateRequestStatusAction", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/requests");
     expect(revalidatePath).toHaveBeenCalledWith("/admin");
     expect(refresh).toHaveBeenCalledExactlyOnceWith();
+    expect(track).toHaveBeenCalledWith("request_status_changed", {
+      requestId: request.id,
+      team: request.team,
+      status: "completed",
+    });
   });
 
   it.each([null, undefined, 10, {}, ["completed"], "unknown"])(
@@ -41,6 +44,7 @@ describe("updateRequestStatusAction", () => {
       ).rejects.toThrow();
       expect(await listRequests()).toEqual([request]);
       expect(refresh).not.toHaveBeenCalled();
+      expect(track).not.toHaveBeenCalled();
       expect(revalidatePath).not.toHaveBeenCalled();
     },
   );
