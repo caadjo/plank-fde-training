@@ -16,7 +16,7 @@ O proxy encaminha o cookie criado para a primeira renderização e também o dev
 
 Branch local: `feat/day5-data-and-mcp`, na worktree `workbot-day5`. Base: integração local do Dia 4, commit 0b69d55. Os seis ajustes ainda sem commit daquela integração foram copiados e preservados aqui; as pastas originais não foram alteradas. A main local estava no merge do PR #20 do Dia 3 quando a preparação começou.
 
-Não houve push, PR, merge remoto ou deploy do Dia 5. Antes de publicar, confira se as entregas do Dia 4 já estão integradas na main de destino e atualize a base. Não inclua novamente mudanças do Dia 4 em um PR que deveria mostrar apenas o Dia 5. O site público não é alterado por esta etapa.
+Publicação em 05/11/2026: o Dia 4 foi integrado pelo PR #21 e o Dia 5 foi enviado no PR #22, agora com base main. O banco Neon workbot-postgres foi criado no plano Free, região iad1, e conectado à Vercel em Production e Preview, com branches de banco para os previews. DATABASE_URL é gerenciado pela integração. POSTHOG_KEY e POSTHOG_HOST foram autorizados para ambos os ambientes; a chave pessoal de leitura permanece local. O PR do Dia 5 só será integrado após a conferência do preview. O site público não é alterado por esta etapa.
 
 ## Rodar no WSL
 
@@ -145,3 +145,12 @@ Use workbot_posthog para listar os quatro eventos do funil dos últimos dez minu
 ```
 
 O endpoint GET /events/ requer query:read na API atual; a referência anterior a event:read foi corrigida conforme https://posthog.com/docs/api/events.
+
+## Preparação da publicação na Vercel — 05/11/2026
+
+- [PR #21](https://github.com/caadjo/plank-fde-training/pull/21): base do Dia 4 integrada e produção conferida com health, solicitações e políticas respondendo 200.
+- [PR #22](https://github.com/caadjo/plank-fde-training/pull/22): Dia 5 enviado, CI aprovado com 155 testes.
+- Revisão estática por bug_hunter, performance_reviewer e security_reviewer: SEM ACHADOS no snapshot base 249a01c7efccb0277a4b8cd50fee9a0ffe6e1c7e e head c5bf58ecbfee1b95ea46c0d5cc5bb4ee7625451f. Limitações: sem auditoria do lockfile ou garantia de ausência de defeitos; testes e execuções reais foram feitos separadamente pela sessão principal.
+- Pré-publicação: tipos e testes aprovados, variáveis locais presentes e nenhuma chamada console.log em src/.
+- O primeiro Verify Day 5 retornou que não havia commits novos na main. Repetir após integrar o PR #22; não considerar essa tentativa uma aprovação.
+- O banco cloud e as variáveis foram configurados após essa tentativa; a validação do preview e da produção é a próxima etapa.
