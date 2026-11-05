@@ -26,6 +26,7 @@ describe("RequestsTable", () => {
       "Finanças",
       "Alta",
       "Nova",
+      `href="/requests/${request.id}"`,
       'scope="col"',
       'dateTime="2026-11-02T12:00:00.000Z"',
     ])
