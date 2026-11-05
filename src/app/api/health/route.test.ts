@@ -1,9 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 import { config } from "@/lib/config";
 import { GET } from "./route";
+import { healthResponseSchema } from "./types";
+import { query } from "@/lib/db";
 
 const { connection } = vi.hoisted(() => ({ connection: vi.fn() }));
 vi.mock("next/server", () => ({ connection }));
+vi.mock("@/lib/db", () => ({
+  query: vi.fn().mockResolvedValue([{ healthy: 1 }]),
+}));
 
 describe("GET /api/health", () => {
   it("waits for a server connection before returning the health response", async () => {
@@ -23,8 +28,23 @@ describe("GET /api/health", () => {
     connect();
     const response = await pending;
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({
+    expect(healthResponseSchema.parse(await response.json())).toEqual({
       status: "ok",
+      database: "ok",
+      commit: config.commit,
+    });
+  });
+
+  it("returns 503 without leaking database credentials on failure", async () => {
+    vi.mocked(query).mockRejectedValueOnce(
+      new Error("postgres://secret-password@host"),
+    );
+    const response = await GET();
+    expect(response.status).toBe(503);
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+    expect(healthResponseSchema.parse(await response.json())).toEqual({
+      status: "error",
+      database: "unavailable",
       commit: config.commit,
     });
   });

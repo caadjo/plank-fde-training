@@ -11,5 +11,8 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    maxWorkers: 2,
+    testTimeout: 20000,
+    hookTimeout: 20000,
   },
 });

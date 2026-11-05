@@ -10,6 +10,7 @@ coverage/
 *.log
 .vercel/
 .turbo/
+.data/
 
 # Next.js and TypeScript generated files
 out/

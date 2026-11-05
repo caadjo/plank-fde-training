@@ -1,9 +1,12 @@
+import "@/testing/database";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { track } from "@/lib/analytics";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { listRequests } from "@/lib/requests/store";
 import { submitRequest } from "./actions";
 import { initialRequestFormState } from "./form-state";
+vi.mock("@/lib/analytics", () => ({ track: vi.fn() }));
 
 vi.mock("next/cache", () => ({
   io: vi.fn().mockResolvedValue(undefined),
@@ -16,7 +19,6 @@ vi.mock("next/navigation", () => ({
 }));
 
 beforeEach(() => {
-  vi.stubGlobal("workbotRequests", []);
   vi.clearAllMocks();
 });
 
@@ -35,6 +37,7 @@ describe("submitRequest", () => {
     expect(await listRequests()).toEqual([]);
     expect(redirect).not.toHaveBeenCalled();
     expect(revalidatePath).not.toHaveBeenCalled();
+    expect(track).not.toHaveBeenCalled();
   });
 
   it("creates a valid request, invalidates the views and redirects", async () => {
@@ -56,6 +59,10 @@ describe("submitRequest", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/requests");
     expect(revalidatePath).toHaveBeenCalledWith("/admin");
     expect(redirect).toHaveBeenCalledWith("/requests");
+    expect(track).toHaveBeenCalledWith("request_submitted", {
+      requestId: expect.any(String),
+      team: "support",
+    });
   });
 
   it("rejects unexpected file values instead of converting them to text", async () => {

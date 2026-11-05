@@ -1,15 +1,55 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import "@/testing/database";
+import { describe, expect, it, vi } from "vitest";
+import { query } from "@/lib/db";
+import * as database from "@/lib/db";
 import { io } from "next/cache";
 import { requestInputSchema, workRequestSchema } from "./schema";
-import { createRequest, getRequest, listRequests, updateRequestStatus } from "./store";
+import {
+  createRequest,
+  getRequest,
+  listRequests,
+  updateRequestStatus,
+} from "./store";
 
 vi.mock("next/cache", () => ({ io: vi.fn().mockResolvedValue(undefined) }));
 
-beforeEach(() => {
-  vi.stubGlobal("workbotRequests", []);
-});
-
 describe("requests model", () => {
+  it("validates database rows against the shared model before returning them", async () => {
+    const spy = vi.spyOn(database, "query").mockResolvedValueOnce([
+      {
+        id: "a76ab7ee-9653-471c-b042-a9c3fe0411f1",
+        title: "Linha incompatível",
+        details: "",
+        team: "finance",
+        priority: "high",
+        status: "unsupported",
+        created_at: new Date(),
+      },
+    ]);
+    try {
+      await expect(
+        getRequest("a76ab7ee-9653-471c-b042-a9c3fe0411f1"),
+      ).rejects.toThrow();
+    } finally {
+      spy.mockRestore();
+    }
+  });
+  it("shares status updates across detail reads and combined filters", async () => {
+    const request = await createRequest({
+      title: "Integração Dia 4",
+      team: "finance",
+    });
+    await updateRequestStatus(request.id, "completed");
+    expect(await getRequest(request.id)).toEqual({
+      ...request,
+      status: "completed",
+    });
+    expect(await listRequests({ team: "finance", status: "new" })).toEqual([]);
+    expect(
+      await listRequests({ team: "finance", status: "completed" }),
+    ).toEqual([{ ...request, status: "completed" }]);
+  });
+
   it("finds only the requested ID and returns defensive copies", async () => {
     await createRequest({ title: "Outra solicitação" });
     const created = await createRequest({ title: "Título original" });
@@ -36,11 +76,12 @@ describe("requests model", () => {
           resume = resolve;
         }),
     );
-    const pending = getRequest("late-id");
+    const id = "a76ab7ee-9653-471c-b042-a9c3fe0411f1";
+    const pending = getRequest(id);
     const created = await createRequest({ title: "Criada durante a espera" });
-    vi.stubGlobal("workbotRequests", [{ ...created, id: "late-id" }]);
+    await query("UPDATE requests SET id = $1 WHERE id = $2", [id, created.id]);
     resume();
-    expect(await pending).toMatchObject({ id: "late-id" });
+    expect(await pending).toMatchObject({ id });
   });
 
   it("updates every shared status, preserves fields and returns defensive copies", async () => {
@@ -164,11 +205,7 @@ describe("requests model", () => {
       title: "Finanças recente",
       team: "finance",
     });
-    vi.stubGlobal("workbotRequests", [
-      first,
-      { ...second, status: "completed" },
-      third,
-    ]);
+    await updateRequestStatus(second.id, "completed");
     expect((await listRequests({ team: "finance" })).map((r) => r.id)).toEqual([
       third.id,
       first.id,

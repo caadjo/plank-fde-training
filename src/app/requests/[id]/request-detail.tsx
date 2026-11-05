@@ -6,6 +6,7 @@ import {
   teamLabels,
 } from "@/lib/requests/schema";
 import { getRequest } from "@/lib/requests/store";
+import { track } from "@/lib/analytics";
 
 const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
   dateStyle: "short",
@@ -20,6 +21,7 @@ export async function RequestDetail({
   const { id } = await params;
   const request = await getRequest(id);
   if (!request) notFound();
+  await track("request_viewed", { requestId: request.id, team: request.team });
 
   return (
     <article className="mt-6 max-w-3xl space-y-8">
