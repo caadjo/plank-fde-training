@@ -48,3 +48,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `node scripts/pr-review-diff.mjs [numero]` obtém o diff e os SHAs sem trocar branch. Sem número, cobre apenas `main...HEAD`, não o working tree.
 - `.codex/hooks.json` registra Prettier após `apply_patch`, `Edit` e `Write`, usando `.codex/hooks/format-edits.mjs`. Respeite a revisão de confiança em `/hooks`; não contorne essa etapa.
 - O hook considera só os arquivos da edição, respeita `.prettierignore` e não formata alvos fora do projeto. Edições por shell não são cobertas por esse matcher.
+
+## Solicitações e administração
+
+- Contrato compartilhado em `src/lib/requests/schema.ts`; não duplique validação entre formulário e API. Limites e defaults estão em `docs/specs/request-model.md`.
+- `store.ts` usa `globalThis` apenas como armazenamento temporário do curso. Não oferece durabilidade nem compartilhamento entre instâncias; use somente dados fictícios nesta etapa.
+- Leituras dinâmicas aguardam `io()` e aparecem sob `Suspense`. A Server Action invalida `/requests` e `/admin` antes de redirecionar.
+- Preserve valores devolvidos após validação, inclusive os selects nativos. Confira também no navegador; o teste da action não demonstra o estado final do DOM.
+- Schemas de resposta da API ficam em `src/app/api/requests/types.ts`; valide respostas nos testes e não converta falhas internas em 400.
+- Configurações ficam em `/admin/settings`; `/settings` mantém compatibilidade por redirecionamento. O admin ainda não tem autenticação nesta etapa do curso.
+- Backlog e integrações: `docs/backlog.md` e `docs/day3-integrations.md`. Ordem de publicação: `docs/day3-publicacao.md`.

@@ -19,7 +19,7 @@ export default function Home() {
           do aplicativo e sua publicação.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/settings" className={buttonVariants()}>
+          <Link href="/admin/settings" className={buttonVariants()}>
             Ver configurações
           </Link>
           <Link

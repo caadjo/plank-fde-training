@@ -16,7 +16,7 @@ export function SiteFooter() {
             Início
           </Link>
           <Link
-            href="/settings"
+            href="/admin/settings"
             className="rounded underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
           >
             Configurações

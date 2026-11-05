@@ -111,3 +111,15 @@ Os testes de integração em `scripts/format-edits.test.ts` criam fixtures tempo
 - Confira `$pr-review 1` na sua sessão e a demonstração automática do hook após ativá-lo.
 - Faça commits separados para revisão e hook, publique o PR, aguarde CI e confira o preview antes de fazer merge.
 - Conclua os três cursos introdutórios pedidos pela aula e use Verify Day 2 após publicar. O resultado da plataforma é a confirmação da etapa.
+
+## Fluxo de solicitações — Dia 3
+
+- `/requests/new`: criação por Server Action, com validação Zod e erros por campo.
+- `/requests`: tabela de solicitações, mais recentes primeiro.
+- `GET /api/requests`: `{ requests }`; `POST /api/requests`: `{ request }` com status 201.
+- `/admin`: contagens por status e cinco solicitações mais recentes.
+- `/admin/settings`: configurações; `/settings` redireciona para o novo endereço.
+
+Use `pnpm dev` para iniciar o projeto na branch atual. Os dados ficam em memória e desaparecem quando o processo reinicia. Em Vercel, instâncias diferentes podem ver listas diferentes até a etapa de banco de dados. O ambiente atual usa dados fictícios e não implementa autorização do admin.
+
+O mesmo schema serve à action, à API e ao modelo. Os testes ficam ao lado dos módulos. Antes da entrega, execute `pnpm check` e teste a sequência descrita em `docs/day3-publicacao.md`.

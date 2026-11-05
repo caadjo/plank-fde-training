@@ -6,28 +6,28 @@ Tickets criados no Linear em 02/11/2026, no projeto WorkBot — AI FDE: https://
 
 S = menos de uma hora; M = duas a quatro horas, como estimativas de escopo, não horas já trabalhadas. Para os itens com tela, vincular um frame real do Figma antes da implementação. Não inventar URLs.
 
-| Ticket Linear | Entrega                            | Tamanho | Situação                                         | Design                                                                     |
-| ------------- | ---------------------------------- | ------- | ------------------------------------------------ | -------------------------------------------------------------------------- |
-| WOR-5         | Estrutura e pipeline inicial       | S       | Concluído no Dia 1                               | Não se aplica                                                              |
-| WOR-8         | Endpoint de saúde                  | S       | Concluído no Dia 1; ajuste dinâmico em andamento | Não se aplica                                                              |
-| WOR-6         | Landing e navegação                | S       | Concluído no Dia 1                               | Frame pendente                                                             |
-| WOR-7         | Configurações e publicação inicial | S       | Concluído no Dia 1                               | Frame pendente                                                             |
-| WOR-9         | Modelo de solicitações             | S       | Planejado — Dia 3                                | Não se aplica                                                              |
-| WOR-11        | Formulário de solicitação          | M       | Planejado — Dia 3                                | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-297) |
-| WOR-10        | Lista de solicitações              | S       | Planejado — Dia 3                                | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-354) |
-| WOR-12        | API de solicitações                | S       | Planejado — Dia 3                                | Não se aplica                                                              |
-| WOR-13        | Layout administrativo              | S       | Planejado — Dia 3                                | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-388) |
-| WOR-14        | Overview administrativo            | S       | Planejado — Dia 3                                | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-388) |
-| WOR-15        | Configurações no admin             | S       | Planejado — Dia 3                                | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-427) |
-| WOR-16        | Detalhe de solicitação             | S       | Proposta — confirmar escopo do Dia 4             | Frame pendente                                                             |
-| WOR-17        | Filtros da lista                   | S       | Proposta — confirmar escopo do Dia 4             | Frame pendente                                                             |
-| WOR-18        | Pesquisa de solicitações           | S       | Proposta — confirmar escopo do Dia 4             | Frame pendente                                                             |
-| WOR-19        | Atualização de status              | S       | Proposta — confirmar escopo do Dia 4             | Frame pendente                                                             |
-| WOR-20        | Estados de carregamento e falha    | S       | Proposta — confirmar escopo do Dia 4             | Frame pendente                                                             |
-| WOR-21        | Configuração do banco              | M       | Proposta — confirmar escopo do Dia 5             | Não se aplica                                                              |
-| WOR-22        | Persistência das solicitações      | M       | Proposta — confirmar escopo do Dia 5             | Não se aplica                                                              |
-| WOR-23        | Consultas e paginação              | S       | Proposta — confirmar escopo do Dia 5             | Não se aplica                                                              |
-| WOR-24        | Teste integrado e guia operacional | S       | Proposta — confirmar escopo dos Dias 4–5         | Não se aplica                                                              |
+| Ticket Linear | Entrega                            | Tamanho | Situação                                       | Design                                                                     |
+| ------------- | ---------------------------------- | ------- | ---------------------------------------------- | -------------------------------------------------------------------------- |
+| WOR-5         | Estrutura e pipeline inicial       | S       | Concluído no Dia 1                             | Não se aplica                                                              |
+| WOR-8         | Endpoint de saúde                  | S       | Ajuste dinâmico preparado; aguarda PR/produção | Não se aplica                                                              |
+| WOR-6         | Landing e navegação                | S       | Concluído no Dia 1                             | Frame pendente                                                             |
+| WOR-7         | Configurações e publicação inicial | S       | Concluído no Dia 1                             | Frame pendente                                                             |
+| WOR-9         | Modelo de solicitações             | S       | Preparado localmente; aguarda PR/produção      | Não se aplica                                                              |
+| WOR-11        | Formulário de solicitação          | M       | Preparado localmente; aguarda PR/produção      | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-297) |
+| WOR-10        | Lista de solicitações              | S       | Preparado localmente; aguarda PR/produção      | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-354) |
+| WOR-12        | API de solicitações                | S       | Preparado localmente; aguarda PR/produção      | Não se aplica                                                              |
+| WOR-13        | Layout administrativo              | S       | Preparado localmente; aguarda PR/produção      | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-388) |
+| WOR-14        | Overview administrativo            | S       | Preparado localmente; aguarda PR/produção      | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-388) |
+| WOR-15        | Configurações no admin             | S       | Preparado localmente; aguarda PR/produção      | [Frame](https://www.figma.com/design/NGnZLC2fN2YKU0dTnVIc0L?node-id=3-427) |
+| WOR-16        | Detalhe de solicitação             | S       | Proposta — confirmar escopo do Dia 4           | Frame pendente                                                             |
+| WOR-17        | Filtros da lista                   | S       | Proposta — confirmar escopo do Dia 4           | Frame pendente                                                             |
+| WOR-18        | Pesquisa de solicitações           | S       | Proposta — confirmar escopo do Dia 4           | Frame pendente                                                             |
+| WOR-19        | Atualização de status              | S       | Proposta — confirmar escopo do Dia 4           | Frame pendente                                                             |
+| WOR-20        | Estados de carregamento e falha    | S       | Proposta — confirmar escopo do Dia 4           | Frame pendente                                                             |
+| WOR-21        | Configuração do banco              | M       | Proposta — confirmar escopo do Dia 5           | Não se aplica                                                              |
+| WOR-22        | Persistência das solicitações      | M       | Proposta — confirmar escopo do Dia 5           | Não se aplica                                                              |
+| WOR-23        | Consultas e paginação              | S       | Proposta — confirmar escopo do Dia 5           | Não se aplica                                                              |
+| WOR-24        | Teste integrado e guia operacional | S       | Proposta — confirmar escopo dos Dias 4–5       | Não se aplica                                                              |
 
 ## WOR-5 — Estrutura e pipeline inicial
 
@@ -41,7 +41,7 @@ Critérios de aceite:
 
 ## WOR-8 — Endpoint de saúde
 
-Tamanho: S. Situação: Concluído no Dia 1; ajuste dinâmico em andamento.
+Tamanho: S. Situação: Ajuste dinâmico preparado; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -71,7 +71,7 @@ Critérios de aceite:
 
 ## WOR-9 — Modelo de solicitações
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -81,7 +81,7 @@ Critérios de aceite:
 
 ## WOR-11 — Formulário de solicitação
 
-Tamanho: M. Situação: Planejado — Dia 3.
+Tamanho: M. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -91,7 +91,7 @@ Critérios de aceite:
 
 ## WOR-10 — Lista de solicitações
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -101,7 +101,7 @@ Critérios de aceite:
 
 ## WOR-12 — API de solicitações
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -111,7 +111,7 @@ Critérios de aceite:
 
 ## WOR-13 — Layout administrativo
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -121,7 +121,7 @@ Critérios de aceite:
 
 ## WOR-14 — Overview administrativo
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -131,7 +131,7 @@ Critérios de aceite:
 
 ## WOR-15 — Configurações no admin
 
-Tamanho: S. Situação: Planejado — Dia 3.
+Tamanho: S. Situação: Preparado localmente; aguarda PR/produção.
 
 Critérios de aceite:
 
@@ -231,4 +231,4 @@ Critérios de aceite:
 
 ## Integrações e design
 
-O cadastro do backlog foi feito pelo navegador na conta do proprietário. A leitura via MCP na sessão Codex do WSL ainda precisa ser configurada e testada. Quatro frames editáveis foram criados no Figma e vinculados aos cinco tickets de telas do Dia 3; links na tabela e em docs/day3-integrations.md. Referências para telas futuras continuam pendentes.
+O cadastro do backlog foi feito pelo navegador na conta do proprietário. A leitura via MCP na sessão Codex do WSL foi configurada e testada em 02/11/2026: WOR-9 no Linear, frame do formulário no Figma e PR 1 no GitHub retornaram conteúdo real. Quatro frames editáveis foram criados no Figma e vinculados aos cinco tickets de telas do Dia 3; links na tabela e em docs/day3-integrations.md. Referências para telas futuras continuam pendentes.

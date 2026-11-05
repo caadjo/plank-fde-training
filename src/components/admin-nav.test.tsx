@@ -9,6 +9,6 @@ describe("AdminNav", () => {
     expect(html).toContain('aria-label="Administração"');
     const currentLink = html.match(/<a\b(?=[^>]*href="\/admin")[^>]*>/)?.[0];
     expect(currentLink).toContain('aria-current="page"');
-    expect(html).toContain('href="/settings"');
+    expect(html).toContain('href="/admin/settings"');
   });
 });

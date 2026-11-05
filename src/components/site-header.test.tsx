@@ -11,13 +11,13 @@ describe("SiteHeader", () => {
     expect(markup).toMatch(/<a\b[^>]*href="\/"[^>]*>/);
     expect(markup).toContain('aria-label="WorkBot — início"');
   });
-  it("oferece solicitações e configurações na navegação principal", () => {
+  it("oferece solicitações e administração na navegação principal", () => {
     const markup = renderToStaticMarkup(<SiteHeader />);
     const navigation = markup.match(
       /<nav\b[^>]*aria-label="Navegação principal"[^>]*>(.*?)<\/nav>/,
     )?.[1];
     expect(navigation).toBeDefined();
     expect(navigation).toContain('href="/requests"');
-    expect(navigation).toContain('href="/settings"');
+    expect(navigation).toContain('href="/admin"');
   });
 });
