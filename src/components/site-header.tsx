@@ -23,6 +23,9 @@ export function SiteHeader() {
         <Link href="/settings" className={buttonVariants({ variant: "ghost" })}>
           Configurações
         </Link>
+        <Link href="/admin" className={buttonVariants({ variant: "ghost" })}>
+          Admin
+        </Link>
       </nav>
     </header>
   );
